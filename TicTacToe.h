@@ -14,5 +14,6 @@ public:
     const Board& board() const {return myBoard;};
     const Player& winner() const {return *Winner;}
     bool check(Pair pr);
+    bool isFull();
 
 };

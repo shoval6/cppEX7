@@ -9,22 +9,28 @@ TicTacToe::TicTacToe(uint size) : myBoard(size){
 
 void TicTacToe::play(Player& xPlayer , Player& oPlayer){
 
+    myBoard = '.';
     xPlayer.myChar = 'X';
     oPlayer.myChar = 'O';
-    myBoard = '.';
     for(uint i=0; i<myBoard.size()*myBoard.size(); i++){
-        try{
+        try {
             Pair pr = xPlayer.play(myBoard);
-            if(myBoard[pr]!='.'){
+            if (myBoard[pr] != '.') {
                 Winner = &oPlayer;
                 return;
             }
 
             myBoard[pr] = xPlayer.myChar;
-            if(check(pr)){
+            if (check(pr)) {
                 Winner = &xPlayer;
-                return;;
+                return;
             }
+
+            if (isFull()) {
+                Winner = &oPlayer;
+                return;
+            }
+
         }
         catch(...){
             Winner = &oPlayer;
@@ -42,7 +48,6 @@ void TicTacToe::play(Player& xPlayer , Player& oPlayer){
             myBoard[pr] = oPlayer.myChar;
             if(check(pr)){
                 Winner = &oPlayer;
-                cout << myBoard << endl;
                 return;;
             }
         }
@@ -86,5 +91,19 @@ bool TicTacToe::check(Pair pr){
     }
     if(state) return state;
     return false;
+
+}
+
+
+bool TicTacToe:: isFull() {
+
+    for(uint i=0; i<myBoard.size(); i++){
+        for(uint j=0; j<myBoard.size(); j++){
+            if(myBoard[{i,j}]!='.')
+                return false;
+        }
+    }
+
+    return true;
 
 }
