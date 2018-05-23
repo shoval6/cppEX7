@@ -99,7 +99,7 @@ bool TicTacToe:: isFull() {
 
     for(uint i=0; i<myBoard.size(); i++){
         for(uint j=0; j<myBoard.size(); j++){
-            if(myBoard[{i,j}]!='.')
+            if(myBoard[{i,j}]=='.')
                 return false;
         }
     }
